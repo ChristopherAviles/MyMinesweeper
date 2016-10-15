@@ -12,10 +12,14 @@ public class MyPanel extends JPanel {
 	private static final int INNER_CELL_SIZE = 29;
 	private static final int TOTAL_COLUMNS = 10;
 	private static final int TOTAL_ROWS = 11;   //Last row has only one cell
+	private static final int TOTAL_MINES = 12;
 	public int x = -1;
 	public int y = -1;
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
+	public int[] minesXCoordinates = new int[TOTAL_MINES];
+	public int[] minesYCoordinates = new int[TOTAL_MINES];
+	
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		if (INNER_CELL_SIZE + (new Random()).nextInt(1) < 1) {	//Use of "random" to prevent unwanted Eclipse warning
@@ -38,7 +42,22 @@ public class MyPanel extends JPanel {
 				colorArray[x][y] = Color.WHITE;
 			}
 		}
+		
+		Random xRandomCoordinate = new Random();
+		Random yRandomCoordinate = new Random();
+		for (int m = 1; m <= 12; m++) {
+			for (int i = 0; i < 12; i++) {
+				int x = xRandomCoordinate.nextInt((9 - 1) + 1) + 1;
+				int y = yRandomCoordinate.nextInt((9 - 1) + 1) + 1;
+				minesXCoordinates[i] = x;
+				minesYCoordinates[i] = y;
+			}
+		}
 	}
+	
+
+	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
@@ -129,4 +148,57 @@ public class MyPanel extends JPanel {
 		}
 		return y;
 	}
+	
+	public int GetNumberMinesAdjacentToSquare (int x, int y) {
+		int sum = 0;
+		for (int i = 0; i < 12; i++) {
+		if ((x + 1) == minesXCoordinates[i] && (y) == minesYCoordinates[i]) {
+			sum++;
+	}
+	}
+		
+		for (int i = 0; i < 12; i++) {
+			if ((x - 1) == minesXCoordinates[i] && (y) == minesYCoordinates[i]) {
+				sum++;
+		}
+		}
+		
+		for (int i = 0; i < 12; i++) {
+			if ((x) == minesXCoordinates[i] && (y + 1) == minesYCoordinates[i]) {
+				sum++;
+		}
+		}
+		
+		for (int i = 0; i < 12; i++) {
+			if ((x) == minesXCoordinates[i] && (y - 1) == minesYCoordinates[i]) {
+				sum++;
+		}
+		}
+		
+		for (int i = 0; i < 12; i++) {
+			if ((x + 1) == minesXCoordinates[i] && (y + 1) == minesYCoordinates[i]) {
+				sum++;
+		}
+		}
+		
+		for (int i = 0; i < 12; i++) {
+			if ((x + 1) == minesXCoordinates[i] && (y - 1) == minesYCoordinates[i]) {
+				sum++;
+		}
+		}
+		
+		for (int i = 0; i < 12; i++) {
+			if ((x - 1) == minesXCoordinates[i] && (y + 1) == minesYCoordinates[i]) {
+				sum++;
+		}
+		}
+		
+		for (int i = 0; i < 12; i++) {
+			if ((x - 1) == minesXCoordinates[i] && (y - 1) == minesYCoordinates[i]) {
+				sum++;
+		}
+		}
+		
+		return sum;
+}
 }

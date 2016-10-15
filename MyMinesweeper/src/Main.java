@@ -14,5 +14,10 @@ public class Main {
 		myFrame.addMouseListener(myMouseAdapter);
 
 		myFrame.setVisible(true);
+		
+		
+		for (int i = 0; i < 12; i++) {
+		System.out.println("Mine " + i + ": " + "(" + myPanel.minesXCoordinates[i] + ", " + myPanel.minesYCoordinates[i] + ")");
+		}
 	}
 }
