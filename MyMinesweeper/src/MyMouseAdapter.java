@@ -133,7 +133,32 @@ public class MyMouseAdapter extends MouseAdapter {
 												}
 											}
 											
-											
+											for (int k = 0; k < (myPanel.mouseDownGridX - 1); k++) {
+												if (myPanel.GetNumberMinesAdjacentToSquare(myPanel.mouseDownGridX - k, myPanel.mouseDownGridY) == 0 && !currentColor.equals(Color.LIGHT_GRAY)) {
+													for (int s = 0; s < 9; s++) {
+														for (int midRow = -1; midRow < 2; midRow++) {
+															newColor = Color.LIGHT_GRAY;
+															myPanel.colorArray[myPanel.mouseDownGridX - k + midRow][myPanel.mouseDownGridY] = newColor;
+															myPanel.repaint();
+														}
+														for (int topRow = -1; topRow < 2; topRow++) {
+															newColor = Color.LIGHT_GRAY;
+															myPanel.colorArray[myPanel.mouseDownGridX - k + topRow][myPanel.mouseDownGridY - 1] = newColor;
+															myPanel.repaint();
+														}
+														for (int bottomRow = -1; bottomRow < 2; bottomRow++) {
+															newColor = Color.LIGHT_GRAY;
+															myPanel.colorArray[myPanel.mouseDownGridX - k + bottomRow][myPanel.mouseDownGridY + 1] = newColor;
+															myPanel.repaint();
+														}
+														
+													}	
+																								
+												}
+												else {
+													break;
+												}
+											}						
 											
 
 										}
